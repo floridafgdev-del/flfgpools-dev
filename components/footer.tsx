@@ -46,7 +46,6 @@ export function Footer() {
               <li><Link href="/about" className="link-underline">{tNav('about')}</Link></li>
               <li><Link href="/products" className="link-underline">{tNav('products')}</Link></li>
               <li><Link href="/showroom" className="link-underline">{tNav('showroom')}</Link></li>
-              <li><Link href="/blog" className="link-underline">{tNav('blog')}</Link></li>
               <li><Link href="/info/faqs" className="link-underline">{tNav('faqs')}</Link></li>
               <li><Link href="/info/pool-benefits" className="link-underline">{tNav('poolBenefits')}</Link></li>
               <li><Link href="/info/pool-pricing-guide" className="link-underline">{tNav('poolPricingGuide')}</Link></li>

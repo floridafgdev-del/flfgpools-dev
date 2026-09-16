@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { Link } from '@/i18n/navigation';
 import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
-import { notFound } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { Breadcrumbs } from '@/components/breadcrumbs';
 import { pools, getPoolBySlug } from '@/lib/pools';
 import { poolProductSchema } from '@/lib/schema/product';
@@ -70,7 +70,7 @@ export default function PoolDetailPage({
   setRequestLocale(locale);
   const t = useTranslations('Products');
   const pool = getPoolBySlug(slug);
-  if (!pool || pool.productClass === 'spa') notFound();
+  if (!pool || pool.productClass === 'spa') redirect(`/${locale}`);
 
   const schema = poolProductSchema(pool, locale);
   const relatedPools = pools

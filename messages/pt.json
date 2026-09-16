@@ -2,7 +2,7 @@
   "Meta": {
     "home": {
       "title": "Florida Fiberglass Pools — Fornecedor e Instalador no Sul da Flórida",
-      "description": "Instalação de piscinas de fibra de vidro premium. Atendemos em todo o sul da Flórida, nos condados de Indian River, St. Lucie, Martin, Palm Beach, Broward, Miami-Dade, Monroe, Collier, Hendry, Glades, Lee, Charlotte, DeSoto, Hardee, Highlands e Okeechobee. Mais de 1000 piscinas entregues, garantia estrutural vitalícia, financiamento disponível."
+      "description": "Instalação de piscinas de fibra de vidro no sul da Flórida. Mais de 1000 piscinas entregues, garantia estrutural vitalícia e financiamento disponível."
     },
     "about": {
       "title": "Sobre Nós — Florida Fiberglass Pools",
@@ -200,6 +200,7 @@
       "subtitle": "Mais de 150 combinações possíveis de estruturas de piscina disponíveis para construção em um prazo médio de 4 semanas."
     },
     "filter": {
+      "title": "Filtre",
       "size": "Tamanho",
       "allSizes": "Todos os tamanhos",
       "upTo16": "Até 16 pés",

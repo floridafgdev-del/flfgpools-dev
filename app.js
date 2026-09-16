@@ -3,6 +3,10 @@
 // The app must be built first with `npm run build` so that `.next`
 // exists before this file is executed.
 
+// cPanel "Setup Node.js App" stores env vars in a .env file at the app root.
+// Load it before importing anything else so process.env is populated.
+import 'dotenv/config';
+
 import next from 'next';
 import { execFileSync } from 'node:child_process';
 import { createServer } from 'http';

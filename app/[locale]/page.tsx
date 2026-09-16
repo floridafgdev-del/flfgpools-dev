@@ -36,6 +36,7 @@ export async function generateMetadata({
         'en-US': '/en',
         'es-US': '/es',
         'pt-BR': '/pt',
+        'x-default': '/en',
       },
     },
     openGraph: {
@@ -79,7 +80,6 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
               fill
               priority
               sizes="100vw"
-              unoptimized
               className="object-cover"
             />
           </div>

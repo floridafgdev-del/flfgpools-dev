@@ -21,7 +21,7 @@ export const SOCIAL_LINKS = {
   },
   hours: {
     weekday: '9am – 5pm',
-    saturday: '9am – 1pm',
+    saturday: '9am – 6pm',
     sunday: 'Closed',
   },
 } as const;

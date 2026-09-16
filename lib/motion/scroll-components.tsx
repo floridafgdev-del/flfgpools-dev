@@ -76,14 +76,18 @@ export function ScrollRevealItem({
   direction?: 'vertical' | 'fade';
 }) {
   const reduce = useReducedMotion();
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   const verticalReveal = direction === 'vertical';
 
   return (
     <motion.div
-      initial={reduce ? false : { opacity: 0, ...(verticalReveal ? { y: 36 } : {}), filter: 'blur(8px)' }}
+      initial={{ opacity: 0, ...(verticalReveal ? { y: 36 } : {}), filter: 'blur(8px)' }}
       whileInView={{ opacity: 1, ...(verticalReveal ? { y: 0 } : {}), filter: 'blur(0px)' }}
       viewport={{ once: true, margin: '-12% 0px -8% 0px' }}
-      transition={reduce ? { duration: 0 } : { duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}

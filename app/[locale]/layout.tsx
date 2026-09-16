@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { DM_Sans, Inter, Playfair_Display } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import {  setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-import { locales } from '@/i18n/routing';
+import { redirect } from 'next/navigation';
+import { locales, defaultLocale } from '@/i18n/routing';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { SvgFilters } from '@/components/svg-filters';
@@ -44,7 +44,7 @@ export async function generateMetadata({
   // Requests the middleware skips (favicon.ico, any file-like path) still reach
   // this segment, so the locale has to be validated before importing messages.
   if (!locales.includes(params.locale as any)) {
-    notFound();
+    redirect(`/${defaultLocale}`);
   }
 
   const messages = (await import(`@/messages/${params.locale}.json`)).default;
@@ -129,7 +129,7 @@ export default async function LocaleLayout({
   params: { locale: string };
 }) {
   if (!locales.includes(params.locale as any)) {
-    notFound();
+    redirect(`/${defaultLocale}`);
   }
 
   setRequestLocale(params.locale);

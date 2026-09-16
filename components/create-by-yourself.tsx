@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useMemo, useState, type ComponentType, type ReactNode } from 'react';
+import { useMemo, useRef, useState, type ComponentType, type ReactNode } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
 import {
@@ -20,6 +20,7 @@ import {
 import { pools, poolColors } from '@/lib/pools';
 import { cn, formatCurrency } from '@/lib/utils';
 import { FormConsentNotice, useFormConsent } from '../components/form-consent';
+import { Recaptcha, RECAPTCHA_ENABLED, type RecaptchaRef } from './recaptcha';
 import type { CreateByYourselfLead } from '@/lib/create-by-yourself-email';
 
 const poolTypes = [
@@ -103,6 +104,8 @@ export function CreateByYourself() {
   const [form, setForm] = useState<FormState>(initialState);
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [mailto, setMailto] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const recaptchaRef = useRef<RecaptchaRef>(null);
   const { accepted: consentAccepted, accept: acceptConsent } = useFormConsent();
 
   const compatiblePools = useMemo(() => {
@@ -141,18 +144,28 @@ export function CreateByYourself() {
 
   const canContinue = () => {
     if (step < 3) return true;
-    return Boolean(consentAccepted && form.name.trim() && form.phone.trim() && form.email.trim() && /^\d{5}$/.test(form.zip));
+    return Boolean(
+      consentAccepted &&
+        form.name.trim() &&
+        form.phone.trim() &&
+        form.email.trim() &&
+        /^\d{5}$/.test(form.zip) &&
+        (!RECAPTCHA_ENABLED || recaptchaToken)
+    );
   };
 
   const submit = async () => {
     if (!canContinue()) return;
+
+    const token = recaptchaRef.current?.getToken() || recaptchaToken;
+    if (RECAPTCHA_ENABLED && !token) return;
 
     setStatus('loading');
     try {
       const response = await fetch('/api/create-by-yourself', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, locale, consent: consentAccepted }),
+        body: JSON.stringify({ ...form, locale, consent: consentAccepted, recaptchaToken: token }),
       });
       const data = await response.json();
 
@@ -162,8 +175,12 @@ export function CreateByYourself() {
 
       setMailto(data.delivered ? '' : (data.mailto || ''));
       setStatus('success');
+      recaptchaRef.current?.reset();
+      setRecaptchaToken('');
     } catch {
       setStatus('error');
+      recaptchaRef.current?.reset();
+      setRecaptchaToken('');
     }
   };
 
@@ -318,6 +335,7 @@ export function CreateByYourself() {
                       <select
                         value={form.model}
                         onChange={(event) => update('model', event.target.value)}
+                        aria-label={t('baseModel')}
                         className="w-full glass-chip rounded-2xl px-4 py-3 text-left"
                       >
                         {(compatiblePools.length ? compatiblePools : pools).map((pool) => (
@@ -435,11 +453,20 @@ export function CreateByYourself() {
             </AnimatePresence>
 
             {step === stepKeys.length - 1 ? (
-              <FormConsentNotice
-                accepted={consentAccepted}
-                onAccept={acceptConsent}
-                id="create-by-yourself-consent"
-              />
+              <>
+                <FormConsentNotice
+                  accepted={consentAccepted}
+                  onAccept={acceptConsent}
+                  id="create-by-yourself-consent"
+                />
+                <Recaptcha
+                  ref={recaptchaRef}
+                  onVerify={setRecaptchaToken}
+                  onExpire={() => setRecaptchaToken('')}
+                  onError={() => setRecaptchaToken('')}
+                  className="mt-4"
+                />
+              </>
             ) : null}
 
             <div className="mt-8 flex flex-col gap-3 border-t border-pool-deep/10 pt-5 sm:flex-row sm:items-center sm:justify-between">

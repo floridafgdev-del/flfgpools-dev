@@ -402,7 +402,7 @@ export const knowledgeBase: KnowledgeEntry[] = [
   {
     id: 'info-pricing',
     keywords: {
-      en: ['price', 'pricing', 'cost', 'expensive', 'budget', 'estimate', 'pool prices', 'how much does a pool cost', 'what does a pool cost'],
+      en: ['price', 'pricing', 'cost', 'expensive', 'budget', 'estimate', 'pool prices', 'how much does a pool cost', 'how much does a pool cost'],
       es: ['precio', 'precios', 'costo', 'cuesta', 'caro', 'presupuesto', 'estimado', 'precios de piscinas', 'cuanto cuesta una piscina'],
       pt: ['preco', 'precos', 'custo', 'custa', 'caro', 'orcamento', 'estimado', 'precos de piscinas', 'quanto custa uma piscina'],
     },

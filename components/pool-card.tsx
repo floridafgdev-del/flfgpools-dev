@@ -51,19 +51,8 @@ export function PoolCard({ pool, locale, index = 0 }: PoolCardProps) {
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <Link href={detailHref}>
-      <motion.div
-        ref={ref}
-        initial={reduce ? {} : { opacity: 0, y: 30, filter: 'blur(8px)' }}
-        animate={reduce ? {} : (isVisible ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 30, filter: 'blur(8px)' })}
-        transition={{
-          duration: 0.3,
-          ease: [0.22, 1, 0.36, 1],
-        }}
-        className="glass-card group"
-
-      >
+  const cardContent = (
+    <>
       {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden rounded-t-glass">
         {hasImage ? (
@@ -146,7 +135,29 @@ export function PoolCard({ pool, locale, index = 0 }: PoolCardProps) {
           </div>
         </div>
       </div>
-      </motion.div>
+    </>
+  );
+
+  return (
+    <Link href={detailHref}>
+      {reduce ? (
+        <div ref={ref} className="glass-card group">
+          {cardContent}
+        </div>
+      ) : (
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0, y: 30, filter: 'blur(8px)' }}
+          animate={isVisible ? { opacity: 1, y: 0, filter: 'blur(0px)' } : { opacity: 0, y: 30, filter: 'blur(8px)' }}
+          transition={{
+            duration: 0.3,
+            ease: [0.22, 1, 0.36, 1],
+          }}
+          className="glass-card group"
+        >
+          {cardContent}
+        </motion.div>
+      )}
     </Link>
   );
 }

@@ -28,6 +28,7 @@ export async function generateMetadata({
         'en-US': '/en/blog',
         'es-US': '/es/blog',
         'pt-BR': '/pt/blog',
+        'x-default': '/en/blog',
       },
     },
     openGraph: {

@@ -24,6 +24,7 @@ export const contactLeadSchema = z.object({
   message: z.string().trim().max(4000).optional().default(''),
   consent: z.literal(true),
   locale: z.enum(['en', 'es', 'pt']).optional().default('en'),
+  recaptchaToken: z.string().optional(),
 });
 
 export type ContactLead = z.infer<typeof contactLeadSchema>;

@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { FormConsentNotice, useFormConsent } from '../components/form-consent';
+import { Recaptcha, RECAPTCHA_ENABLED, type RecaptchaRef } from './recaptcha';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, AlertCircle, Loader2, MapPin, ExternalLink } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/config/site';
@@ -14,6 +15,8 @@ export function ContactForm() {
   const [zipError, setZipError] = useState('');
   const [addressValue, setAddressValue] = useState('');
   const [mailto, setMailto] = useState('');
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const recaptchaRef = useRef<RecaptchaRef>(null);
   const { accepted: consentAccepted, accept: acceptConsent } = useFormConsent();
 
   const validateZip = (zip: string) => {
@@ -38,6 +41,9 @@ export function ContactForm() {
 
     if (zip && !validateZip(zip)) return;
 
+    const token = recaptchaRef.current?.getToken() || recaptchaToken;
+    if (RECAPTCHA_ENABLED && !token) return;
+
     setStatus('loading');
     try {
       const response = await fetch('/api/contact', {
@@ -53,6 +59,7 @@ export function ContactForm() {
           message: formData.get('message') || '',
           locale,
           consent: consentAccepted,
+          recaptchaToken: token,
         }),
       });
       const data = await response.json();
@@ -65,8 +72,12 @@ export function ContactForm() {
       setStatus('success');
       form.reset();
       setAddressValue('');
+      recaptchaRef.current?.reset();
+      setRecaptchaToken('');
     } catch {
       setStatus('error');
+      recaptchaRef.current?.reset();
+      setRecaptchaToken('');
     }
   };
 
@@ -219,9 +230,17 @@ export function ContactForm() {
         id="contact-consent"
       />
 
+      <Recaptcha
+        ref={recaptchaRef}
+        onVerify={setRecaptchaToken}
+        onExpire={() => setRecaptchaToken('')}
+        onError={() => setRecaptchaToken('')}
+        className="py-1"
+      />
+
       <button
         type="submit"
-        disabled={status === 'loading' || !consentAccepted}
+        disabled={status === 'loading' || !consentAccepted || (RECAPTCHA_ENABLED && !recaptchaToken)}
         className="w-full glass-btn-primary px-6 py-3 text-white font-medium disabled:opacity-60"
       >
         {status === 'loading' ? (

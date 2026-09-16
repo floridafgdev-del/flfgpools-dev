@@ -1,0 +1,161 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/flfgpools/flfg-new"
+PassengerBaseURI "/"
+PassengerNodejs "/home/flfgpools/nodevenv/flfg-new/20/bin/node"
+PassengerAppType node
+PassengerStartupFile app.js
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+RewriteEngine On
+RewriteOptions inherit
+
+# =========================================================
+# REDIRECCIÓN DE LA RAÍZ A /en
+# =========================================================
+
+RewriteRule ^$ /en [R=302,L]
+
+# =========================================================
+# REDIRECCIONES ANTIGUAS
+# =========================================================
+
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^home$ https://flfgpools.com/en [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en/home$ https://flfgpools.com/en [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^pools$ https://flfgpools.com/en/products [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^resources$ https://flfgpools.com/en/info/faqs [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en/resources$ https://flfgpools.com/en/info/faqs [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en/projects$ https://flfgpools.com/en/showroom [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^our-projects$ https://flfgpools.com/en/showroom [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^service$ https://flfgpools.com/en/products [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^categoria-produto$ https://flfgpools.com/en/products [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^produto$ https://flfgpools.com/en/products [R=301,L]
+
+# =========================================================
+# CLOUDLINUX PASSENGER - NEXT.JS / NODE.JS
+# =========================================================
+
+# =========================================================
+# VARIABLES DE ENTORNO
+# =========================================================
+
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+SetEnv LEADS_TO_EMAIL sales@flfgpools.com
+SetEnv SMTP_FROM Florida Fiberglass Pools <floridafiberglasspools@gmail.com>
+SetEnv SMTP_HOST smtp.gmail.com
+SetEnv SMTP_PORT 587
+SetEnv SMTP_USER floridafiberglasspools@gmail.com
+SetEnv SMTP_PASS iuhcliimgcxnwijw
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
+
+# =========================================================
+# SEGURIDAD
+# =========================================================
+
+Options -Indexes
+
+<Files ".user.ini">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</Files>
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/admin$ "https\:\/\/flfgpools\.com\/en" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/pool\-equipment$ "https\:\/\/flfgpools\.com\/en\/products" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/categoria\-produto\/pools$ "https\:\/\/flfgpools\.com\/en\/products" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/patio\-furnitures$ "https\:\/\/flfgpools\.com\/en\/products" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/produto\/$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/blog\/fiberglass\-pool\-cost\-miami\-2026$ "https\:\/\/flfgpools\.com\/en\/info\/pool\-pricing\-guide" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/blog\/cuanto\-cuesta\-piscina\-fibra\-miami$ "https\:\/\/flfgpools\.com\/en\/info\/pool\-pricing\-guide" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/blog\/fiberglass\-vs\-concrete\-pools\-florida$ "https\:\/\/flfgpools\.com\/en\/info\/fiberglass\-concrete" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/blog\/pool\-maintenance\-checklist\-florida$ "https\:\/\/flfgpools\.com\/en\/info\/pool\-benefits" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/rl\-2$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/rl2\-rio\-ledge" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/rl\-1$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/rl1\-natal\-ledge" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r1$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r1\-neblina\-grande" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/produto\/r2$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r2\-colombian" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r3$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r3\-colombian\-cove" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/produto\/r4$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r4\-cali\-cove" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r5$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r5\-costa\-rica" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r6$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r6\-roatan" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r7$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r7\-brasilia" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r8$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r8\-belize" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/produto\/r9$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r9\-colombian\-beach" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r10$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r10\-costa\-beach" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r12$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r12\-roatan\-beach" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/produto\/r13$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r13\-colombian\-resort" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r14$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r14\-nova" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/produto\/r15$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r15\-solaris" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/produto\/r16$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r16\-radiant\-island" [R=301,L]
+RewriteCond %{HTTP_HOST} ^flfgpools\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.flfgpools\.com$
+RewriteRule ^en\/produto\/r17$ "https\:\/\/flfgpools\.com\/en\/products\/pools\/r17\-macaw\-cove" [R=301,L]
+RewriteCond %{HTTP_HOST} ^.*$
+RewriteRule ^en\/spa\/r3$ "https\:\/\/flfgpools\.com\/en\/products\/spa\/rs1\-quatro" [R=301,L]

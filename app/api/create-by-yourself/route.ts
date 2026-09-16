@@ -3,11 +3,21 @@ import {
   createByYourselfLeadSchema,
   sendCreateByYourselfLead,
 } from '@/lib/create-by-yourself-email';
+import { getRequestIp, verifyRecaptcha } from '@/lib/recaptcha';
 
 export async function POST(request: Request) {
   try {
     const payload = await request.json();
     const lead = createByYourselfLeadSchema.parse(payload);
+
+    const recaptcha = await verifyRecaptcha(payload.recaptchaToken, getRequestIp(request));
+    if (!recaptcha.success) {
+      return NextResponse.json(
+        { ok: false, error: 'reCAPTCHA verification failed', recaptchaErrors: recaptcha.errorCodes },
+        { status: 400 }
+      );
+    }
+
     const { delivered, mailto } = await sendCreateByYourselfLead(lead);
 
     // The mailto: fallback is only useful when delivery is not configured.

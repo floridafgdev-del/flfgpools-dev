@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/nodemailer": "^8.0.1",
     "clsx": "2.1.1",
+    "dotenv": "^16.4.5",
     "framer-motion": "11.3.0",
     "gray-matter": "4.0.3",
     "lucide-react": "0.408.0",

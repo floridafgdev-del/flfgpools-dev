@@ -28,6 +28,7 @@ export const createByYourselfLeadSchema = z.object({
   notes: z.string().optional().default(''),
   consent: z.literal(true),
   locale: z.enum(['en', 'es', 'pt']).optional().default('en'),
+  recaptchaToken: z.string().optional(),
 });
 
 export type CreateByYourselfLead = z.infer<typeof createByYourselfLeadSchema>;

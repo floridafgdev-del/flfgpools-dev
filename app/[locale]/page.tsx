@@ -60,7 +60,7 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
   const featuredPools = getFeaturedPools();
 
   return (
-    <>
+    <div className="home-page">
       {/* === HERO === */}
       <section className="relative min-h-[90vh] overflow-hidden">
         <ParallaxBackground className="absolute inset-0 h-[90vh] w-full">
@@ -451,6 +451,6 @@ export default function HomePage({ params: { locale } }: { params: { locale: str
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

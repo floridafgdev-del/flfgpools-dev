@@ -215,7 +215,7 @@ export function CreateByYourself() {
             initial={reduce ? false : { opacity: 0, x: -24 }}
             whileInView={reduce ? {} : { opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="glass-card min-h-[380px] sm:min-h-[620px] overflow-hidden bg-pool-deep/20"
+            className="motion-reveal glass-card min-h-[380px] sm:min-h-[620px] overflow-hidden bg-pool-deep/20"
           >
             <div className="relative h-full min-h-[380px] sm:min-h-[620px]">
               <AnimatePresence mode="wait">
@@ -225,7 +225,7 @@ export function CreateByYourself() {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.45 }}
-                  className="absolute inset-0 h-full w-full"
+                  className="motion-reveal absolute inset-0 h-full w-full"
                 >
                   <Image
                     src={previewImage}
@@ -271,7 +271,7 @@ export function CreateByYourself() {
             initial={reduce ? false : { opacity: 0, y: 24 }}
             whileInView={reduce ? {} : { opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-card bg-white/75 p-5 md:p-7"
+            className="motion-reveal glass-card bg-white/75 p-5 md:p-7"
           >
             <div className="mb-6 grid grid-cols-2 sm:grid-cols-4 gap-2">
               {stepKeys.map((key, index) => (
@@ -295,7 +295,7 @@ export function CreateByYourself() {
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 exit={{ opacity: 0, y: -8, filter: 'blur(6px)' }}
                 transition={{ duration: 0.25 }}
-                className="min-h-[430px]"
+                className="motion-reveal min-h-[430px]"
               >
                 {step === 0 && (
                   <div className="space-y-6">
@@ -494,7 +494,7 @@ export function CreateByYourself() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="mt-5 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm text-green-800"
+                  className="motion-reveal mt-5 rounded-2xl border border-green-200 bg-green-50 p-4 text-sm text-green-800"
                 >
                   {t('success')}
                   {mailto ? (
@@ -507,7 +507,7 @@ export function CreateByYourself() {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="mt-5 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
+                  className="motion-reveal mt-5 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700"
                 >
                   {t('error')}
                 </motion.div>

@@ -153,7 +153,7 @@ export function PoolCard({ pool, locale, index = 0 }: PoolCardProps) {
             duration: 0.3,
             ease: [0.22, 1, 0.36, 1],
           }}
-          className="glass-card group"
+          className="motion-reveal glass-card group"
         >
           {cardContent}
         </motion.div>

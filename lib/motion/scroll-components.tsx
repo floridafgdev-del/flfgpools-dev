@@ -20,6 +20,7 @@ export function SectionReveal({ children }: { children: ReactNode }) {
         hidden: {},
         visible: { transition: { staggerChildren: 0.08 } },
       }}
+      className="motion-reveal"
     >
       {children}
     </motion.section>
@@ -58,7 +59,7 @@ export function RevealItem({
         }),
       }}
       custom={custom}
-      className={className}
+      className={`motion-reveal${className ? ` ${className}` : ''}`}
     >
       {children}
     </motion.div>
@@ -88,7 +89,7 @@ export function ScrollRevealItem({
       whileInView={{ opacity: 1, ...(verticalReveal ? { y: 0 } : {}), filter: 'blur(0px)' }}
       viewport={{ once: true, margin: '-12% 0px -8% 0px' }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
+      className={`motion-reveal${className ? ` ${className}` : ''}`}
     >
       {children}
     </motion.div>
@@ -276,6 +277,7 @@ export function HeroReveal({ children }: { children: ReactNode }) {
         hidden: {},
         visible: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
       }}
+      className="motion-reveal"
     >
       {children}
     </motion.div>
@@ -314,7 +316,7 @@ export function HeroItem({
         }),
       }}
       custom={custom}
-      className={className}
+      className={`motion-reveal${className ? ` ${className}` : ''}`}
     >
       {children}
     </motion.div>

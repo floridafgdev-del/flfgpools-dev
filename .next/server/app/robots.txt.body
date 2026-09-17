@@ -1,0 +1,6 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+
+Host: https://flfgpools.com
+Sitemap: https://flfgpools.com/sitemap.xml

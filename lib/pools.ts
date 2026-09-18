@@ -616,7 +616,7 @@ export const pools: Pool[] = [
       '/iso-models/Pools/Colombian/Columbian-Pool-plan.png',
       '/iso-models/Pools/Colombian/Columbian-Pool-iso.png',
       '/iso-models/Pools/Colombian/Columbian-Pool-iso-2.png',
-      '/iso-models/Pools/Colombian/Columbian-Pool-tech-p.png',
+      '/iso-models/Pools/Colombian/Colombian-Pool-tech-p.png',
     ],
     colors: poolColorNames,
     description: manufacturerDesc('R2'),

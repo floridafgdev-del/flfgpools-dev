@@ -21,6 +21,7 @@ import { pools, poolColors } from '@/lib/pools';
 import { cn, formatCurrency } from '@/lib/utils';
 import { FormConsentNotice, useFormConsent } from '../components/form-consent';
 import { Recaptcha, RECAPTCHA_ENABLED, type RecaptchaRef } from './recaptcha';
+import { trackGenerateLead } from '@/lib/analytics';
 import type { CreateByYourselfLead } from '@/lib/create-by-yourself-email';
 
 const poolTypes = [
@@ -174,6 +175,7 @@ export function CreateByYourself() {
       }
 
       setMailto(data.delivered ? '' : (data.mailto || ''));
+      trackGenerateLead('create-by-yourself');
       setStatus('success');
       recaptchaRef.current?.reset();
       setRecaptchaToken('');

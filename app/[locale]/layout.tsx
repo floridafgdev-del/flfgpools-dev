@@ -4,13 +4,14 @@ import { NextIntlClientProvider } from 'next-intl';
 import {  setRequestLocale } from 'next-intl/server';
 import { redirect } from 'next/navigation';
 import { locales, defaultLocale } from '@/i18n/routing';
+import { GoogleTagManager } from '@next/third-parties/google';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import { SvgFilters } from '@/components/svg-filters';
 import { Chatbot } from '@/components/chatbot';
 import { combinedSchema } from '@/lib/schema';
 import { BUSINESS_INFO, SEO_CONFIG, SITE_URL } from '@/config/site';
-import '../global.css';
+import '@/app/global.css';
 
 export const dynamic = 'force-dynamic';
 
@@ -146,7 +147,16 @@ export default async function LocaleLayout({
           }}
         />
       </head>
+      <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID ?? 'GTM-MQNJZRG'} />
       <body className="min-h-screen flex flex-col">
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-MQNJZRG"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <SvgFilters />
         <NextIntlClientProvider locale={params.locale} messages={messages}>
           <Header />

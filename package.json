@@ -13,6 +13,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@next/third-parties": "^14.2.5",
     "@types/nodemailer": "^8.0.1",
     "clsx": "2.1.1",
     "dotenv": "^16.4.5",

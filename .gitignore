@@ -5,6 +5,7 @@ next.js
 /.next
 /.next/
 /out/
+.next
 
 # production
 /build
@@ -23,6 +24,8 @@ yarn-error.log*
 .env
 
 archivo.zip
+.next.zip
+.git.zip
 
 # vercel
 .vercel

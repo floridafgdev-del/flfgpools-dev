@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { FormConsentNotice, useFormConsent } from '../components/form-consent';
 import { Recaptcha, RECAPTCHA_ENABLED, type RecaptchaRef } from './recaptcha';
+import { trackGenerateLead } from '@/lib/analytics';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, AlertCircle, Loader2, MapPin, ExternalLink } from 'lucide-react';
 import { SOCIAL_LINKS } from '@/config/site';
@@ -69,6 +70,7 @@ export function ContactForm() {
       }
 
       setMailto(data.delivered ? '' : data.mailto || '');
+      trackGenerateLead('contact');
       setStatus('success');
       form.reset();
       setAddressValue('');

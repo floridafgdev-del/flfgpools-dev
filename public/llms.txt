@@ -1,0 +1,33 @@
+# Florida Fiberglass Pools
+
+> Florida Fiberglass Pools supplies and installs fiberglass pools, spas, and tanning ledges throughout South Florida. The site provides product information, sizing guidance, project resources, showroom details, and ways to request a quote.
+
+Use the linked pages as the authoritative source for current product information, service details, policies, and contact options. Product availability, pricing, dimensions, installation requirements, and service areas may change; confirm them with Florida Fiberglass Pools before making a recommendation.
+
+## Main resources
+
+- [Home](https://flfgpools.com/en): Overview of Florida Fiberglass Pools and its services.
+- [Products](https://flfgpools.com/en/products): Fiberglass pool and spa models, dimensions, colors, and product details.
+- [Showroom](https://flfgpools.com/en/showroom): Showroom information and visit details.
+- [About Florida Fiberglass Pools](https://flfgpools.com/en/about): Company background and experience.
+- [Contact](https://flfgpools.com/en/contact): Contact details and lead form.
+- [Create by Yourself](https://flfgpools.com/en/create-by-yourself): Guided pool configuration and quote request form.
+
+## Guides and information
+
+- [Frequently asked questions](https://flfgpools.com/en/info/faqs): Answers about fiberglass pools, installation, maintenance, and purchasing.
+- [Fiberglass vs. concrete](https://flfgpools.com/en/info/fiberglass-concrete): Comparison of fiberglass and concrete pools.
+- [Pool benefits](https://flfgpools.com/en/info/pool-benefits): Benefits of fiberglass pool ownership.
+- [Pool pricing guide](https://flfgpools.com/en/info/pool-pricing-guide): Factors that affect pool project pricing.
+- [Pool colors](https://flfgpools.com/en/info/colors): Available finish colors and visual examples.
+
+## Localized resources
+
+The site also provides the main resources in Spanish and Brazilian Portuguese. Replace `/en/` in a link with `/es/` or `/pt/` to access the corresponding localized page when available.
+
+## Policies and discovery
+
+- [Privacy policy](https://flfgpools.com/en/privacy-policy): Privacy and information handling policy.
+- [Terms and conditions](https://flfgpools.com/en/terms-and-conditions): Site terms and conditions.
+- [XML sitemap](https://flfgpools.com/sitemap.xml): Indexable localized pages and product URLs.
+- [Robots policy](https://flfgpools.com/robots.txt): Crawler access policy.

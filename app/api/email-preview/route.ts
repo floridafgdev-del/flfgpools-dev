@@ -11,7 +11,7 @@ export async function GET(request: Request) {
           size: '16to22',
           model: 'r4-cali-cove',
           color: 'Caribbean Blue',
-          extras: ['led-lighting', 'heater', 'salt-system'],
+          extras: ['heater', 'deck-patio', 'water-fall', 'deck-jet'],
           city: 'Coral Gables',
           zip: '33134',
           backyardAccess: 'crane-needed',

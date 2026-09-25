@@ -1,0 +1,17 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Florida Fiberglass Pools",
+    "identifier": "flfgpools.com",
+    "documentationUrl": "https://flfgpools.com/llms.txt"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:flfgpools.com:website",
+      "displayName": "Florida Fiberglass Pools website",
+      "type": "text/html",
+      "url": "https://flfgpools.com/en",
+      "description": "Authoritative information about fiberglass pools, spas, tanning ledges, products, installation services, showroom visits, project guidance, and quote requests in South Florida."
+    }
+  ]
+}

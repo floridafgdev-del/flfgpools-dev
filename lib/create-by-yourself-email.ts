@@ -16,9 +16,9 @@ export const createByYourselfLeadSchema = z.object({
   size: z.enum(['upTo16', '16to22', '22plus', 'spa', 'ledge']),
   model: z.string().min(1),
   color: z.string().min(1),
-  extras: z.array(z.string()).default([]),
+  extras: z.array(z.enum(['heater', 'deck-patio', 'water-fall', 'deck-jet'])).default([]),
   city: z.string().min(2),
-  zip: z.string().regex(/^\d{5}$/),
+  zip: z.string().regex(/^\d{5}$/).or(z.literal('')),
   backyardAccess: z.enum(['wide-open', 'standard-gate', 'tight-access', 'crane-needed', 'not-sure']),
   timeline: z.enum(['asap', '1-3-months', '3-6-months', 'planning']),
   role: z.enum(['homeowner', 'contractor', 'realtor', 'investor']),
@@ -54,11 +54,13 @@ const labels: Record<string, string> = {
   contractor: 'Contractor',
   realtor: 'Realtor',
   investor: 'Investor',
-  'integrated-spa': 'Integrated spa',
-  'led-lighting': 'LED lighting',
+  // 'integrated-spa': 'Integrated spa',
+  // 'led-lighting': 'LED lighting',
   'heater': 'Heater',
   'deck-patio': 'Deck / patio area',
-  'salt-system': 'Salt system',
+  'water-fall': 'Water fall',
+  'deck-jet': 'Deck jet',
+  // 'salt-system': 'Salt system',
   en: 'English',
   es: 'Spanish',
   pt: 'Portuguese',
@@ -69,7 +71,9 @@ export function readable(value: string) {
 }
 
 export function buildCreateByYourselfEmail(lead: CreateByYourselfLead) {
-  const subject = `Create by Yourself · ${lead.name} (${lead.city} ${lead.zip})`;
+  const location = [lead.city, lead.zip && `FL ${lead.zip}`].filter(Boolean).join(', ');
+  const subjectLocation = [lead.city, lead.zip].filter(Boolean).join(' ');
+  const subject = `Create by Yourself · ${lead.name} (${subjectLocation})`;
   const pool = pools.find((item) => item.slug === lead.model);
   const model = pool ? `${pool.modelCode} ${pool.name}` : lead.model;
   const dimensions = pool
@@ -98,7 +102,7 @@ export function buildCreateByYourselfEmail(lead: CreateByYourselfLead) {
       {
         heading: 'Site details',
         rows: [
-          ['Location', `${lead.city}, FL ${lead.zip}`, `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${lead.city}, FL ${lead.zip}`)}`],
+          ['Location', location, `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`],
           ['Backyard access', readable(lead.backyardAccess)],
           ['Desired timeline', readable(lead.timeline)],
         ],

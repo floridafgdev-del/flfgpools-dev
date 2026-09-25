@@ -553,14 +553,14 @@
     "finishColor": "Color de acabado",
     "projectExtras": "Extras del proyecto",
     "extras": {
-      "integrated-spa": "Spa integrado",
-      "led-lighting": "Iluminación LED",
       "heater": "Calentador",
       "deck-patio": "Deck / área de patio",
-      "salt-system": "Sistema de sal"
+      "water-fall": "Cascada",
+      "deck-jet": "Jet de deck"
     },
     "city": "Ciudad",
     "zipCode": "Código postal",
+    "optional": "Opcional",
     "backyardAccess": "Acceso al patio",
     "accessOptions": {
       "wide-open": "Acceso amplio",
@@ -590,6 +590,8 @@
     "back": "Atrás",
     "send": "Enviar mi configuración",
     "continue": "Continuar",
+    "consent": "Consentimiento de privacidad",
+    "missingFields": "Completa lo siguiente: {fields}",
     "success": "Tu configuración está lista. Nuestro equipo la revisará y responderá en 24 horas laborales.",
     "openEmailFallback": "Abrir respaldo de correo",
     "error": "No pudimos enviar la solicitud. Por favor revisa los campos obligatorios o llámanos directamente.",

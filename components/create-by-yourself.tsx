@@ -38,6 +38,18 @@ const sizeOptions = [
   { value: 'ledge' },
 ] as const;
 
+const sizeOptionsByPoolType = {
+  pool: sizeOptions.slice(0, 3),
+  spa: sizeOptions.slice(3, 4),
+  'tanning-ledge': sizeOptions.slice(4),
+} as const;
+
+const defaultSizeByPoolType = {
+  pool: '16to22',
+  spa: 'spa',
+  'tanning-ledge': 'ledge',
+} as const;
+
 const fallbackImages = [
   '/projects/R2-RS4.jpg',
   '/projects/R4.jpg',
@@ -46,11 +58,10 @@ const fallbackImages = [
 ];
 
 const extras = [
-  'integrated-spa',
-  'led-lighting',
   'heater',
   'deck-patio',
-  'salt-system',
+  'water-fall',
+  'deck-jet',
 ] as const;
 
 const accessOptions = [
@@ -84,7 +95,7 @@ const initialState: FormState = {
   size: '16to22',
   model: pools[0]?.slug || 'r15-oasis',
   color: 'Caribbean Blue',
-  extras: ['led-lighting'],
+  extras: [],
   city: 'Miami',
   zip: '',
   backyardAccess: 'not-sure',
@@ -143,17 +154,27 @@ export function CreateByYourself() {
     }));
   };
 
-  const canContinue = () => {
-    if (step < 3) return true;
-    return Boolean(
-      consentAccepted &&
-        form.name.trim() &&
-        form.phone.trim() &&
-        form.email.trim() &&
-        /^\d{5}$/.test(form.zip) &&
-        (!RECAPTCHA_ENABLED || recaptchaToken)
-    );
+  const handlePoolTypeChange = (poolType: FormState['poolType']) => {
+    const size = defaultSizeByPoolType[poolType];
+    const first = pools.find((pool) => pool.sizeCategory === size);
+    setForm((current) => ({ ...current, poolType, size, model: first?.slug || current.model }));
+    setStatus('idle');
   };
+
+  const getMissingFields = () => {
+    if (step < 3) return [];
+
+    const missing: string[] = [];
+    if (!form.name.trim()) missing.push(t('fullName'));
+    if (!form.phone.trim()) missing.push(t('phone'));
+    if (!form.email.trim()) missing.push(t('email'));
+    if (form.zip && !/^\d{5}$/.test(form.zip)) missing.push(t('zipCode'));
+    if (!consentAccepted) missing.push(t('consent'));
+    if (RECAPTCHA_ENABLED && !recaptchaToken) missing.push('reCAPTCHA');
+    return missing;
+  };
+
+  const canContinue = () => getMissingFields().length === 0;
 
   const submit = async () => {
     if (!canContinue()) return;
@@ -307,7 +328,7 @@ export function CreateByYourself() {
                         <OptionButton
                           key={item.value}
                           active={form.poolType === item.value}
-                          onClick={() => update('poolType', item.value)}
+                          onClick={() => handlePoolTypeChange(item.value)}
                         >
                           <item.icon className="h-5 w-5" />
                           {t(`poolTypes.${item.value}`)}
@@ -317,13 +338,13 @@ export function CreateByYourself() {
                     <div>
                       <FieldLabel icon={Ruler}>{t('sizeRange')}</FieldLabel>
                       <OptionGrid>
-                        {sizeOptions.map((item) => (
+                        {sizeOptionsByPoolType[form.poolType].map((item) => (
                           <OptionButton
                             key={item.value}
                             active={form.size === item.value}
                             onClick={() => {
                               update('size', item.value);
-                              const first = pools.find((pool) => pool.sizeCategory === item.value && pool.productClass !== 'spa' && pool.productClass !== 'ledge');
+                              const first = pools.find((pool) => pool.sizeCategory === item.value);
                               if (first) update('model', first.slug);
                             }}
                           >
@@ -399,7 +420,7 @@ export function CreateByYourself() {
                     <StepTitle icon={MapPin} label={t('stepLabels.step3')} title={t('step3Title')} />
                     <div className="grid gap-4 md:grid-cols-2">
                       <TextField label={t('city')} value={form.city} onChange={(value) => update('city', value)} placeholder="Miami" />
-                      <TextField label={t('zipCode')} value={form.zip} onChange={(value) => update('zip', value.replace(/\D/g, '').slice(0, 5))} placeholder="33189" />
+                      <TextField label={`${t('zipCode')} (${t('optional')})`} value={form.zip} onChange={(value) => update('zip', value.replace(/\D/g, '').slice(0, 5))} placeholder="33189" />
                     </div>
                     <div>
                       <FieldLabel icon={MapPin}>{t('backyardAccess')}</FieldLabel>
@@ -469,6 +490,12 @@ export function CreateByYourself() {
                   className="mt-4"
                 />
               </>
+            ) : null}
+
+            {getMissingFields().length > 0 ? (
+              <p className="mt-5 text-sm font-medium text-red-600" role="status">
+                {t('missingFields', { fields: getMissingFields().join(', ') })}
+              </p>
             ) : null}
 
             <div className="mt-8 flex flex-col gap-3 border-t border-pool-deep/10 pt-5 sm:flex-row sm:items-center sm:justify-between">

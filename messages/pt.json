@@ -553,14 +553,14 @@
     "finishColor": "Cor de acabamento",
     "projectExtras": "Extras do projeto",
     "extras": {
-      "integrated-spa": "Spa integrado",
-      "led-lighting": "Iluminação LED",
       "heater": "Aquecedor",
       "deck-patio": "Deck / área de quintal",
-      "salt-system": "Sistema de sal"
+      "water-fall": "Cascata",
+      "deck-jet": "Jato de deck"
     },
     "city": "Cidade",
     "zipCode": "Código postal",
+    "optional": "Opcional",
     "backyardAccess": "Acesso ao quintal",
     "accessOptions": {
       "wide-open": "Acesso amplo",
@@ -590,6 +590,8 @@
     "back": "Voltar",
     "send": "Enviar minha configuração",
     "continue": "Continuar",
+    "consent": "Consentimento de privacidade",
+    "missingFields": "Preencha o seguinte: {fields}",
     "success": "Sua configuração está pronta. Nossa equipe revisará e responderá em 24 horas de trabalho.",
     "openEmailFallback": "Abrir fallback de email",
     "error": "Não pudemos enviar a solicitação. Por favor verifique os campos obrigatórios ou ligue para nós diretamente.",

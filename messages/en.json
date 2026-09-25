@@ -553,14 +553,14 @@
     "finishColor": "Finish color",
     "projectExtras": "Project extras",
     "extras": {
-      "integrated-spa": "Integrated spa",
-      "led-lighting": "LED lighting",
       "heater": "Heater",
       "deck-patio": "Deck / patio area",
-      "salt-system": "Salt system"
+      "water-fall": "Water fall",
+      "deck-jet": "Deck jet"
     },
     "city": "City",
     "zipCode": "ZIP code",
+    "optional": "Optional",
     "backyardAccess": "Backyard access",
     "accessOptions": {
       "wide-open": "Wide open access",
@@ -590,6 +590,8 @@
     "back": "Back",
     "send": "Send my configuration",
     "continue": "Continue",
+    "consent": "Privacy consent",
+    "missingFields": "Please complete: {fields}",
     "success": "Your configuration is ready. Our team will review it and respond within 24 business hours.",
     "openEmailFallback": "Open email fallback",
     "error": "We could not send the request. Please check required fields or call us directly.",
